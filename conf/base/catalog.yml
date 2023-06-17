@@ -2,3 +2,9 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+raw_razer:
+  type: pandas.ExcelDataSet
+  filepath: data/01_raw/payment_report_1686903035.xlsx
+  load_args:
+    engine: openpyxl # Use modern Excel engine, it is the default since Kedro 0.18.0
