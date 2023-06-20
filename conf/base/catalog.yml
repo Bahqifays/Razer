@@ -16,3 +16,4 @@ razer_preprocessed:
 razer_calculated:
   type: pandas.ExcelDataSet
   filepath: data/03_primary/razer_calculated.xlsx
+  versioned: true
