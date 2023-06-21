@@ -10,6 +10,11 @@ razer_raw:
     engine: openpyxl # Use modern Excel engine, it is the default since Kedro 0.18.0
   layer: raw
 
+# razer_raw:
+#   type: pandas.SQLQueryDataSet
+#   sql: "select a, b, c from transactions;"
+#   credentials: prod_sql
+
 razer_preprocessed:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/razer_preprocessed.csv
