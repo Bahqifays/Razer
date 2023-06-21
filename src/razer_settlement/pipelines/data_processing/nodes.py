@@ -66,14 +66,14 @@ def calculation_razer(preprocessed_data: pd.DataFrame, channels: dict) -> pd.Dat
 
     razer_calculated = preprocessed_data.copy()
 
-    # Create a dictionary of lists containing the keys
-    channel_dict = {key: [inner_dict_key for inner_dict in value for inner_dict_key in inner_dict.keys()] for key, value in channels.items()}
+    # Create a dictionary of lists
+    channel_dict = {key: list(value.keys()) for key, value in channels.items()}
 
     # Create the new 'rate_type' column based on the 'channel' column
     razer_calculated['rate_type'] = razer_calculated['channel_copy'].apply(lambda x: next(key for key, value in channel_dict.items() if x in value))
 
     # Create a new column containing the values based on the keys in the 'channel' column
-    razer_calculated['rate'] = razer_calculated['channel_copy'].apply(lambda x: next(d.get(x) for d in channels.values() for d in d if x in d))
+    razer_calculated['rate'] = razer_calculated['channel_copy'].map({k: v for d in channels.values() for k, v in d.items()})
     
     # Create the 'txn_charge' column based on the conditions of 'rate_type'
     razer_calculated['txn_charge'] = np.where(razer_calculated['rate_type'] == 'fixed', razer_calculated['rate'], 

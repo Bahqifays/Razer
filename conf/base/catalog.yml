@@ -8,12 +8,15 @@ razer_raw:
   filepath: data/01_raw/payment_report_1687230153.xlsx
   load_args:
     engine: openpyxl # Use modern Excel engine, it is the default since Kedro 0.18.0
+  layer: raw
 
 razer_preprocessed:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/razer_preprocessed.csv
+  layer: intermediate
 
 razer_calculated:
   type: pandas.ExcelDataSet
   filepath: data/03_primary/razer_calculated.xlsx
   versioned: true
+  layer: primary
