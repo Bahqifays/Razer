@@ -87,5 +87,11 @@ def calculation_razer(preprocessed_data: pd.DataFrame, channels: dict) -> pd.Dat
                   'rate_type', 'rate', 'currency', 'txn_amount', 'txn_charge', 
                   'net_amount']
     razer_final = razer_calculated[final_cols]
+
+        # Calculate the sum for the last 3 columns
+    total_row = razer_final.iloc[:, -3:].sum()
+
+    # Append the total row to the DataFrame
+    razer_final = razer_final.append(total_row, ignore_index=True)
     
     return razer_final
